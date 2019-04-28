@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
         //animate.SetFloat("Horizontal", Input.GetAxis("Horizontal"));
 
         movement = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-
+        
 
     }
     void FixedUpdate()
@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
 
         moveCharacter(movement);
         jumpCharacter();
-        
+
 
     }
 
@@ -45,11 +45,16 @@ public class PlayerController : MonoBehaviour
 
     void jumpCharacter()
     {
-        if(Input.GetKey(KeyCode.Space) && !isJumping)
+        if(Input.GetKeyDown(KeyCode.Space) && !isJumping)
         {
+            float timePassed = 0;
             isJumping = true;
-
-            rb.velocity = jumping * jumpForce;
+            while(timePassed < 1)
+            {
+                rb.velocity = jumping * 6.0f;
+                timePassed += Time.deltaTime;
+            }
+            
         }
     }
 
